@@ -28,19 +28,6 @@
 				color: #fff;
         float:right;
 			}
-			#date {
-				position: fixed;
-				width: 720px;
-				margin: 0 0 0 50%;
-				top: 50px;
-				bottom: 50px;
-				left: -400px;
-				padding: 20px 40px;
-				background: #00AE9D;
-				font-family: 'Helvetica Neue', Arial, sans-serif;
-				font-size: 9pt;
-				color: #222;
-			}
 			#editor {
 				width: 50em;
 				margin: 0 auto; 
@@ -60,7 +47,6 @@
       <h1 contenteditable="true">Title</h1>
 			<a id="action-save">Download</a>
 		</header>
-		<div id="date"></div>
 		<div id="editor" contenteditable="true"></div>
 
 		<script type="text/javascript">
@@ -89,14 +75,7 @@
 			function render() {
 				var d = new Date(data.edited);
 
-				document.getElementById("date").innerHTML = 'Last saved: <b>' 
-						+ d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' 
-						+ d.getHours() + ':' 
-						+ (d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()) 
-						+ '</b>';
-			}
-
-			function saveToFile() {
+      function saveToFile() {
 				window.location = 'data:application/octet-stream,' + 
 					escape(data.data
 						.replace(/<div>/g, '\n')
