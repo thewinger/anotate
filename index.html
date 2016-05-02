@@ -2,28 +2,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Editor</title>
+		<title>Anotate</title>
 		<style type="text/css">
 			body {
-				background-color: #EEE;
+				background-color: #fafafa;
 			}
 			header {
-				z-index: 1000;
-				position: fixed;
-				width: 800px;
-				margin: 0 0 0 50%;
-				top: 50px;
-				left: -400px;
-				text-align: right;
+				width: 50em;
+				margin: 0 auto;
+        overflow: hidden;
 			}
+      header h1 {
+        float: left;
+        margin: 0;
+				font-family: 'Helvetica Neue', Arial, sans-serif;
+        color: #fff;
+      }
 			header a {
 				display: inline-block;
 				cursor: pointer;
 				padding: 18px;
 				background: #00AE9D;
 				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-				font-size: 9pt;
+				font-size: 0.75em;;
 				color: #fff;
+        float:right;
 			}
 			#date {
 				position: fixed;
@@ -39,20 +42,15 @@
 				color: #222;
 			}
 			#editor {
-				position: fixed;
-				overflow-y: scroll;
-				width: 720px;
-				margin: 0 0 0 50%;
-				top: 100px;
-				bottom: 50px;
-				left: -400px;
+				width: 50em;
+				margin: 0 auto; 
 				padding: 40px;
 				outline: none;
 				background: #FFF;
 			}
 			#editor, #editor * {
 				font-family: monaco, monospace;
-				font-size: 10pt;
+				font-size: 14pt;
 				color: #222;
 			}
 		</style>
