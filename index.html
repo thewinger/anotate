@@ -59,21 +59,23 @@
 	</head>
 	<body>
 		<header>
+      <h1 contenteditable="true">Title</h1>
 			<a id="action-save">Download</a>
 		</header>
 		<div id="date"></div>
 		<div id="editor" contenteditable="true"></div>
 
 		<script type="text/javascript">
-      var key = "draft",
+      /*var key = "draft",
       contentEl = document.getElementById("editor");
 
       contentEl.innerHTML = localStorage[key] || '';
       contentEl.onkeyup=function() {
         localStorage[key] = contentEl.innerHTML;
       };
+      */
 			var data = get();
-			if(!data.edited && ! data.data) data = {edited: (new Date()).getTime(), data: ''};
+			if(!data.edited && !data.data) data = {edited: (new Date()).getTime(), data: ''};
 
 			function save() {
 				data.edited = (new Date()).getTime();
