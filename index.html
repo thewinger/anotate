@@ -4,33 +4,39 @@
 	<head>
 		<title>Anotate</title>
 		<style type="text/css">
+      * {
+        box-sizing: border-box;
+      }
 			body {
-				background-color: #fafafa;
+				background-color: #eee;
 			}
+      .wrapper {
+        width: 50em;
+          margin: 0 auto;
+      }
 			header {
-				width: 50em;
-				margin: 0 auto;
         overflow: hidden;
+        background-color: #00AE9D;
+        padding: 1em;
 			}
       header h1 {
         float: left;
         margin: 0;
 				font-family: 'Helvetica Neue', Arial, sans-serif;
         color: #fff;
+        font-weight: 400;
       }
 			header a {
 				display: inline-block;
 				cursor: pointer;
-				padding: 18px;
 				background: #00AE9D;
 				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 				font-size: 0.75em;;
 				color: #fff;
         float:right;
+          line-height: 3em;
 			}
 			#editor {
-				width: 50em;
-				margin: 0 auto; 
 				padding: 40px;
 				outline: none;
 				background: #FFF;
@@ -43,12 +49,13 @@
 		</style>
 	</head>
 	<body>
+    <div class="wrapper">
 		<header>
       <h1 contenteditable="true">Title</h1>
 			<a id="action-save">Download</a>
 		</header>
 		<div id="editor" contenteditable="true"></div>
-
+    </div>
 		<script type="text/javascript">
       /*var key = "draft",
       contentEl = document.getElementById("editor");
