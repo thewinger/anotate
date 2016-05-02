@@ -25,6 +25,11 @@
 				font-family: 'Helvetica Neue', Arial, sans-serif;
         color: #fff;
         font-weight: 400;
+        line-height: 4.375em;
+        padding-left: 1rem;
+      }
+      header h1:focus {
+        outline: none;
       }
 			header a {
 				display: inline-block;
@@ -34,7 +39,8 @@
 				font-size: 0.75em;;
 				color: #fff;
         float:right;
-          line-height: 3em;
+        line-height: 4.375rem;
+        padding-left: 1rem;
 			}
 			#editor {
 				padding: 40px;
@@ -65,8 +71,9 @@
         localStorage[key] = contentEl.innerHTML;
       };
       */
+  
 			var data = get();
-			if(!data.edited && !data.data) data = {edited: (new Date()).getTime(), data: ''};
+			//if(!data.edited && !data.data) data = {edited: (new Date()).getTime(), data: ''};
 
 			function save() {
 				data.edited = (new Date()).getTime();
