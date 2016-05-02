@@ -23,7 +23,7 @@
 				background: #00AE9D;
 				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 				font-size: 9pt;
-				color: #222;
+				color: #fff;
 			}
 			#date {
 				position: fixed;
@@ -65,50 +65,13 @@
 		<div id="editor" contenteditable="true"></div>
 
 		<script type="text/javascript">
-			var data = get();
-			if(!data.edited && ! data.data) data = {edited: (new Date()).getTime(), data: ''};
+      var key = "draft",
+      contentEl = document.getElementById("editor");
 
-			function save() {
-				data.edited = (new Date()).getTime();
-				localStorage.setItem('data', JSON.stringify(data));
-
-				render();
-			}
-
-			function get() {
-				return JSON.parse(localStorage.getItem('data'));
-			}
-
-			function render() {
-				var d = new Date(data.edited);
-
-				document.getElementById("date").innerHTML = 'Last saved: <b>' 
-						+ d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' 
-						+ d.getHours() + ':' 
-						+ (d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()) 
-						+ '</b>';
-			}
-
-			function saveToFile() {
-				window.location = 'data:application/octet-stream,' + 
-					escape(data.data
-						.replace(/<div>/g, '\n')
-						.replace(/<\/div>/g, '')
-						.replace(/<br>/g, ''));
-			}
-
-			document.getElementById("editor").addEventListener('keyup', function(e) {
-				data.data = document.getElementById("editor").innerHTML;
-				save();
-			});
-			document.getElementById("editor").innerHTML = data.data;
-			document.getElementById("editor").focus();
-
-			document.getElementById("action-save").addEventListener('click', function(e) {
-				saveToFile();
-			});
-			
-			render();
+      contentEl.innerHTML = localStorage[key] || '';
+      contentEl.onkeyup=function() {
+        localStorage[key] = contentEl.innerHTML;
+      };
 		</script>
 	</body>
 </html>
