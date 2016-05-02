@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Editor</title>
+		<style type="text/css">
+			body {
+				background-color: #EEE;
+			}
+			header {
+				z-index: 1000;
+				position: fixed;
+				width: 800px;
+				margin: 0 0 0 50%;
+				top: 50px;
+				left: -400px;
+				text-align: right;
+			}
+			header a {
+				display: inline-block;
+				cursor: pointer;
+				padding: 18px;
+				background: #39E3C7;
+				font-family: Arial, sans-serif;
+				font-size: 9pt;
+				color: #222;
+			}
+			#date {
+				position: fixed;
+				width: 720px;
+				margin: 0 0 0 50%;
+				top: 50px;
+				bottom: 50px;
+				left: -400px;
+				padding: 20px 40px;
+				background: #3AF2D4;
+				font-family: Arial, sans-serif;
+				font-size: 9pt;
+				color: #222;
+			}
+			#editor {
+				position: fixed;
+				overflow-y: scroll;
+				width: 720px;
+				margin: 0 0 0 50%;
+				top: 100px;
+				bottom: 50px;
+				left: -400px;
+				padding: 40px;
+				outline: none;
+				background: #FFF;
+			}
+			#editor, #editor * {
+				font-family: monaco, monospace;
+				font-size: 10pt;
+				color: #222;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<a id="action-save">Download</a>
+		</header>
+		<div id="date"></div>
+		<div id="editor" contenteditable="true"></div>
+
+		<script type="text/javascript">
+			var data = get();
+			if(!data.edited && ! data.data) data = {edited: (new Date()).getTime(), data: ''};
+
+			function save() {
+				data.edited = (new Date()).getTime();
+				localStorage.setItem('data', JSON.stringify(data));
+
+				render();
+			}
+
+			function get() {
+				return JSON.parse(localStorage.getItem('data'));
+			}
+
+			function render() {
+				var d = new Date(data.edited);
+
+				document.getElementById("date").innerHTML = 'Last saved: <b>' 
+						+ d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' 
+						+ d.getHours() + ':' 
+						+ (d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()) 
+						+ '</b>';
+			}
+
+			function saveToFile() {
+				window.location = 'data:application/octet-stream,' + 
+					escape(data.data
+						.replace(/<div>/g, '\n')
+						.replace(/<\/div>/g, '')
+						.replace(/<br>/g, ''));
+			}
+
+			document.getElementById("editor").addEventListener('keyup', function(e) {
+				data.data = document.getElementById("editor").innerHTML;
+				save();
+			});
+			document.getElementById("editor").innerHTML = data.data;
+			document.getElementById("editor").focus();
+
+			document.getElementById("action-save").addEventListener('click', function(e) {
+				saveToFile();
+			});
+			
+			render();
+		</script>
+	</body>
+</html>
